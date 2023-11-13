@@ -21,3 +21,17 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static('public'))
 
+app.get('/api/:id', async (req,res) => {
+    try{
+        const {id} = req.params
+        const {rows} = await pool.query(`SELECT * FROM ${id}`)
+        res.status(200).json(rows)
+    }catch(err){
+        console.log(err)
+        res.status(500).send('internal server error')
+    }
+})
+
+app.listen(PORT, () => {
+    console.log(`server running on port ${PORT}`)
+})
