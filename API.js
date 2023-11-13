@@ -17,9 +17,9 @@ const pool = new Pool ({
     port: "5432"
 })
 
+app.use(express.static('public'))
 app.use(cors())
 app.use(express.json())
-app.use(express.static('public'))
 
 app.get('/api/:id', async (req,res) => {
     try{
